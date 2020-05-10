@@ -11,7 +11,7 @@ router.get("/task/:taskId", taskController.getTask);
 router.get("/tasks", taskController.getTasks);
 
 // POST /tasks/create
-router.post("/task/create", taskController.createTask);
+router.post("/create", taskController.createTask);
 
 // EDIT /tasks/edit
 // router.put("/task/edit", taskController.editTask);

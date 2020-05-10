@@ -13,13 +13,15 @@ export const getTasks = (req, res, next) => {
 export const createTask = (req, res, next) => {
   const title = req.body.title;
   const description = req.body.description;
+  const priority = req.body.priority;
+  const imageUrl = req.body.imageUrl;
   const taskId = req.body._id;
 
   if (req.body._id) {
-    editTask({ taskId, title, description });
+    editTask({ taskId, title, description, res, priority, imageUrl });
     return;
   }
-  addTaskToDb({ title, description });
+  addTaskToDb({ title, description, res, priority, imageUrl });
 };
 
 export const getTask = (req, res, next) => {
@@ -56,12 +58,20 @@ export const deleteTask = (req, res, next) => {
     .catch((err) => console.log("Errorrrrrr", err));
 };
 
-export const addTaskToDb = ({ title, description }) => {
+export const addTaskToDb = ({
+  title,
+  description,
+  res,
+  priority,
+  imageUrl,
+}) => {
   const task = new Task({
     title,
     description,
+    priority,
+    imageUrl,
     creator: {
-      name: "Alon braymok",
+      name: "Nikol Arazi",
     },
     owner: null,
     parent: null,
@@ -78,7 +88,7 @@ export const addTaskToDb = ({ title, description }) => {
     .catch((err) => console.log({ err }));
 };
 
-export const editTask = ({ taskId, title, description }) => {
+export const editTask = ({ taskId, title, description, res, imageUrl }) => {
   Task.findById(taskId)
     .then((task) => {
       if (!task) {
@@ -88,6 +98,7 @@ export const editTask = ({ taskId, title, description }) => {
       }
       task.title = title;
       task.description = description;
+      task.imageUrl = imageUrl;
       return task.save();
     })
     .then((result) => {
