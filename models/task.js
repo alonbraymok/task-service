@@ -7,15 +7,11 @@ const taskSchema = new Schema(
       type: String,
       required: true,
     },
-    priority: {
+    imageUrl: {
       type: String,
       required: false,
     },
     description: {
-      type: String,
-      required: true,
-    },
-    imageUrl: {
       type: String,
       required: true,
     },

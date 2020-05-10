@@ -14,8 +14,10 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "aws-sdk": "^2.670.0",
     "body-parser": "^1.18.3",
     "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
     "express": "^4.16.3",
     "mongoose": "^5.9.9"
   },
